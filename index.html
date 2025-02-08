@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+
+    <!--CSS Link-->
+
+    <link rel="stylesheet" href="style.css">
+
+    <!--Google Fonts Links-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <form id="Reg">
+        <h2>Register</h2>
+
+        <input type="text" id="name" placeholder="Name" oninput="Reg()">
+        <span id="nameError"></span>
+
+        <input type="text" id="email" placeholder="E-mail" oninput="Reg()">
+        <span id="emailError"></span>
+
+        <input type="password" id="password" placeholder="Password" oninput="Reg()">
+        <span id="passwordError"></span>
+
+        <button type="submit" id="Regbtn" disabled>Register</button>
+
+    </form>
+
+    <script>
+
+        function Reg() {
+            var name = document.getElementById("name").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var password = document.getElementById("password").value.trim();
+            var Regbtn = document.getElementById("Regbtn");
+
+            var nameError = document.getElementById("nameError");
+            var emailError = document.getElementById("emailError");
+            var passwordError = document.getElementById("passwordError");
+
+            var isValid = true;
+
+            // Name validation
+            if (name === "") {
+                nameError.textContent = "Name field cannot be empty";
+                isValid = false;
+            } else {
+                nameError.textContent = "";
+            }
+
+            // Email validation
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                emailError.textContent = "Enter a valid email address"; // Fixed typo
+                isValid = false;
+            } else {
+                emailError.textContent = "";
+            }
+
+            // Password validation
+            if (password.length < 6) {
+                passwordError.textContent = "Password must be at least 6 characters";
+                isValid = false;
+            } else {
+                passwordError.textContent = "";
+            }
+
+            // Enable/disable submit button
+            Regbtn.disabled = !isValid;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("Reg").addEventListener("submit", function (event) {
+                if (document.getElementById("Regbtn").disabled) {
+                    event.preventDefault();
+                } else {
+                    alert("Registration successful!");
+                }
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
